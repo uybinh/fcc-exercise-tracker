@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- import the webpage's stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- import the webpage's client-side javascript file -->
+  <script src="/client.js" defer></script>
+  <title>FCC Timestamp Microservice</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>FCC Exercise Tracker</h1>
+
+    <div class="form-container">
+      <form action="/api/exercise/new-user" method="POST" id="new-user-form">
+        <h4>
+          New User
+        </h4>
+        <input id="user-name" type="text" name="user[name]" placeholder="username">
+        <button type="submit">
+          Create user
+        </button>
+      </form>
+    </div>
+
+    <div class="form-container">
+      <form action="api/exercise/add" id="new-exercise-form">
+        <h4>
+          New Exercise
+        </h4>
+        <input id="user-id" name="user-id" type="text" placeholder="user id">
+        <input id="exercise-description" name="exercise-description" type="text" placeholder="description">
+        <input id="exercise-duration" name="exercise-duration" type="text" placeholder="duration">
+        <input id="exercise-date" name="exercise-date" type="date" placeholder="dd-mm-yyyy">
+        <button tupe="submit">
+          Save exercise
+        </button>
+      </form>
+    </div>
+
+  </div>
+</body>
+
+</html>
