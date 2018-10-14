@@ -18,4 +18,9 @@ router.get("/getall", (req, res) => {
 	User.find({}).then(docs => res.json(docs))
 })
 
+router.post("/add", (req, res) => {
+	const { exercise } = req.body
+	res.json(exercise)
+})
+
 module.exports = router
