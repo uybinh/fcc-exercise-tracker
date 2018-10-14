@@ -30,14 +30,14 @@
     </div>
 
     <div class="form-container">
-      <form action="api/exercise/add" id="new-exercise-form">
+      <form action="api/exercise/add" method="POST" id="new-exercise-form">
         <h4>
           New Exercise
         </h4>
-        <input id="user-id" name="user-id" type="text" placeholder="user id">
-        <input id="exercise[description]" name="exercise-description" type="text" placeholder="description">
-        <input id="exercise[duration]" name="exercise-duration" type="text" placeholder="duration">
-        <input id="exercise[date]" name="exercise-date" type="date" placeholder="dd-mm-yyyy">
+        <input id="user-id" name="exercise[userId]" type="text" placeholder="user id">
+        <input id="exercise-description" name="exercise[description]" type="text" placeholder="description">
+        <input id="exercise-duration" name="exercise[duration]" type="text" placeholder="duration">
+        <input id="exercise-date" name="exercise[date]" type="date" placeholder="dd-mm-yyyy">
         <button tupe="submit">
           Save exercise
         </button>
