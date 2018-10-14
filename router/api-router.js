@@ -1,12 +1,11 @@
 const express = require("express")
 const router = express.Router()
-const bodyParser = require("body-parser")
-const urlencodedParser = bodyParser.urlencoded({ extended: true })
+
 require("../db/database")
 const User = require("../model/user")
 // const Exercise = require("../model/exercise")
 
-router.post("/new-user", urlencodedParser, (req, res) => {
+router.post("/new-user", (req, res) => {
 	const { name } = req.body.user
 
 	User.createAndSave(name)

@@ -4,10 +4,14 @@ const express = require("express")
 const app = express()
 const router = require("./router/api-router")
 const PORT = process.env.PORT || 5000
-
+const bodyParser = require("body-parser")
+const urlencodedParser = bodyParser.urlencoded({ extended: true })
+const jsonencodeParser = bodyParser.json()
 /*eslint no-console: ["off"] */
 app
 	.use(express.static(path.resolve(__dirname, "public")))
+	.use(urlencodedParser)
+	.use(jsonencodeParser)
 	.listen(PORT, () => console.log(`App is listening on port ${PORT}`))
 
 app.get("/", (req, res) => {
