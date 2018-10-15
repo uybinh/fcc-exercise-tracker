@@ -18,7 +18,13 @@ const schema = mongoose.Schema({
 	date: {
 		type: Date,
 		required: true
-	}
+	},
+	updatedAt: Date,
+	createdAt: Date
 })
+
+schema.pre("save", createTimestamp)
+
+schema.statics.createAndSave = function()
 
 module.exports = mongoose.model("Exercise", schema)
