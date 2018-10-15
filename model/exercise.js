@@ -21,11 +21,19 @@ const schema = mongoose.Schema({
 		required: true
 	},
 	updatedAt: Date,
-	createdAt: Date
+	createdAt: {
+		type: Date,
+		unique: true
+	}
 })
 
 schema.pre("save", createTimestamp)
 
-schema.statics.createAndSave = function()
+schema.statics.createAndSave = function(exerciseParams) {
+	const exercise = new this(exerciseParams)
+	return Promise.resolve(exercise.save())
+		.then(exercise => exercise)
+		.catch(err => handleErrorsOnCreate(err))
+}
 
 module.exports = mongoose.model("Exercise", schema)
