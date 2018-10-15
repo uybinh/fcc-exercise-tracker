@@ -16,7 +16,8 @@ const userSchema = mongoose.Schema({
 	},
 	username: {
 		type: String,
-		unique: true
+		unique: true,
+		required: true
 	},
 	createdAt: Date,
 	updatedAt: Date
