@@ -1,4 +1,5 @@
 const shortid = require("shortid")
+const createTimestamp = require("../lib/mongo-timestamp")
 const mongoose = require("mongoose")
 const schema = mongoose.Schema({
 	_id: {

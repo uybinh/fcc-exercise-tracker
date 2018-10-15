@@ -1,4 +1,5 @@
 const shortid = require("shortid")
+const createTimestamp = require("../lib/mongo-timestamp")
 const mongoose = require("mongoose")
 mongoose.set("useCreateIndex", true)
 
@@ -20,17 +21,7 @@ const userSchema = mongoose.Schema({
 	updatedAt: Date
 })
 
-userSchema.pre("save", function(next) {
-	const now = Date.now()
-	// update every time document is saved
-	this.updatedAt = now
-	// only set time at the first time created
-	if (!this.createdAt) {
-		this.createdAt = now
-	}
-	// Call the next function in the pre-save chain
-	next()
-})
+userSchema.pre("save", createTimestamp)
 
 userSchema.statics.createAndSave = function(name) {
 	const user = new this({
