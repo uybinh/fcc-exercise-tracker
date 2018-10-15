@@ -21,8 +21,40 @@ router.post("/add", (req, res) => {
 		.catch(err => res.type("txt").send(err))
 })
 
+router.get("/log", (req, res) => {
+	const { userId, from, to, limit } = req.query
+	const fromDate = new Date(from)
+	const toDate = new Date(to)
+	Exercise.find({
+		user: userId,
+		date: {
+			$gte: fromDate,
+			$lte: toDate
+		}
+	})
+		.populate("user")
+		.limit(Number(limit))
+		.exec((err, exercises) => {
+			res.json(exercises)
+		})
+})
+
 // Get all created users
-router.get("/getall", (req, res) => {
+router.get("/allusers", (req, res) => {
 	User.find({}).then(docs => res.json(docs))
 })
+
+router.get("/allexercises", (req, res) => {
+	Exercise.find({}).then(docs => res.json(docs))
+})
+
+router.get("/test", (req, res) => {
+	Exercise.findOne({ user: "SZoGJy4NS" })
+		.populate("user")
+		.exec(function(err, exercise) {
+			if (err) return res.json(err)
+			res.json(exercise.user)
+		})
+})
+
 module.exports = router
