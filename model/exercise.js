@@ -1,8 +1,9 @@
 const shortid = require("shortid")
-const createTimestamp = require("../lib/mongo-timestamp")
+const timestampPlugin = require("./plugins/timestamp")
 const mongoose = require("mongoose")
 const { handleErrorsOnCreate } = require("../lib/handle-erorrs")
-const schema = mongoose.Schema({
+const User = require("./user")
+const exerciseSchema = mongoose.Schema({
 	_id: {
 		type: String,
 		default: shortid.generate,

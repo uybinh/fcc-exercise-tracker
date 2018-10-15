@@ -1,5 +1,5 @@
 const shortid = require("shortid")
-const createTimestamp = require("../lib/mongo-timestamp")
+const timestampPlugin = require("./plugins/timestamp")
 const mongoose = require("mongoose")
 const { handleErrorsOnCreate } = require("../lib/handle-erorrs")
 mongoose.set("useCreateIndex", true)
@@ -19,11 +19,15 @@ const userSchema = mongoose.Schema({
 		unique: true,
 		required: true
 	},
-	createdAt: Date,
-	updatedAt: Date
+	exercises: [
+		{
+			type: String,
+			ref: "Exercise"
+		}
+	]
 })
 
-userSchema.pre("save", createTimestamp)
+userSchema.plugin(timestampPlugin)
 
 userSchema.statics.createAndSave = function(name) {
 	const user = new this({
