@@ -13,14 +13,15 @@ router.post("/new-user", (req, res) => {
 		.catch(err => res.type("txt").send(err))
 })
 
-// Get all created users
-router.get("/getall", (req, res) => {
-	User.find({}).then(docs => res.json(docs))
-})
 
 router.post("/add", (req, res) => {
 	const { exercise } = req.body
 	res.json(exercise)
 })
 
+
+// Get all created users
+router.get("/getall", (req, res) => {
+	User.find({}).then(docs => res.json(docs))
+})
 module.exports = router
