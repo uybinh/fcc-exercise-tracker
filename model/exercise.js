@@ -1,6 +1,7 @@
 const shortid = require("shortid")
 const createTimestamp = require("../lib/mongo-timestamp")
 const mongoose = require("mongoose")
+const { handleErrorsOnCreate } = require("../lib/handle-erorrs")
 const schema = mongoose.Schema({
 	_id: {
 		type: String,

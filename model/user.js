@@ -1,6 +1,7 @@
 const shortid = require("shortid")
 const createTimestamp = require("../lib/mongo-timestamp")
 const mongoose = require("mongoose")
+const { handleErrorsOnCreate } = require("../lib/handle-erorrs")
 mongoose.set("useCreateIndex", true)
 
 const userSchema = mongoose.Schema({
@@ -29,14 +30,7 @@ userSchema.statics.createAndSave = function(name) {
 	})
 	return Promise.resolve(user.save())
 		.then(user => user)
-		.catch(err => {
-			// only handle duplication error
-			if (err.message.indexOf("duplicate key error") !== -1) {
-				return "User existed"
-			} else {
-				return "Something went wrong"
-			}
-		})
+		.catch(err => handleErrorsOnCreate(err))
 }
 
 module.exports = mongoose.model("User", userSchema)
