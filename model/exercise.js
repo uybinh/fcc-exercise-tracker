@@ -21,20 +21,44 @@ const exerciseSchema = mongoose.Schema({
 		type: Date,
 		required: true
 	},
-	updatedAt: Date,
-	createdAt: {
-		type: Date,
-		unique: true
+	user: {
+		type: String,
+		required: true,
+		ref: "User"
 	}
 })
 
-schema.pre("save", createTimestamp)
+exerciseSchema.plugin(timestampPlugin)
 
-schema.statics.createAndSave = function(exerciseParams) {
-	const exercise = new this(exerciseParams)
-	return Promise.resolve(exercise.save())
+exerciseSchema.post("save", function(exercise, next) {
+	User.findById(exercise.user)
+		.then(user => {
+			user.exercises.push(exercise._id)
+			user.save()
+		})
+		.catch(error => error)
+	next()
+})
+
+exerciseSchema.statics.createAndSave = function(exerciseParams) {
+	const userId = exerciseParams.user
+	return new Promise((resolve, reject) => {
+		User.findById(userId, (err, user) => {
+			if (user) {
+				const exercise = new this(exerciseParams)
+				resolve(exercise.save())
+			} else {
+				reject("Invalid Id")
+			}
+			if (err) {
+				reject(err)
+			}
+		})
+	})
 		.then(exercise => exercise)
-		.catch(err => handleErrorsOnCreate(err))
+		.catch(err => {
+			return handleErrorsOnCreate(err)
+		})
 }
 
-module.exports = mongoose.model("Exercise", schema)
+module.exports = mongoose.model("Exercise", exerciseSchema)
