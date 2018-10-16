@@ -22,8 +22,47 @@ h6 {
 }
 
 h1 {
-  margin: 2rem;
+  margin: 2rem 0;
   text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-areas: 'head head' 'usage user' 'usage exercise';
+  }
+  #header {
+    grid-area: head;
+  }
+  #usage-note {
+    grid-area: usage;
+  }
+  #user-form {
+    grid-area: user;
+  }
+  #exercise-form {
+    grid-area: exercise;
+  }
+}
+
+#usage-note {
+  max-width: 500px;
+  margin: 0 15px;
+}
+
+#usage-note code {
+  display: block;
+  margin: 1rem 0;
+  padding: 1rem;
+  color: hsl(0, 0%, 95%);
+  background: hsl(0, 0%, 20%);
+  border-radius: 2px;
 }
 
 .form-container {
@@ -32,7 +71,7 @@ h1 {
 
 form {
   display: block;
-  width: 320px;
+  width: 300px;
   padding: 1.5rem;
   margin: 0 auto;
   border-radius: 5px;

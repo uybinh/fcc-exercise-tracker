@@ -15,9 +15,29 @@
 
 <body>
   <div class="container">
-    <h1>FCC Exercise Tracker</h1>
+    <header id="header">
+      <h1>FCC Exercise Tracker</h1>
+    </header>
 
-    <div class="form-container">
+    <div id="usage-note">
+      <h2>Usage</h2>
+      <p>
+        <strong>Create a New User</strong>
+        <code>POST /api/exercise/new-user</code>
+        <strong>Add exercises</strong>
+        <code>POST /api/exercise/add</code>
+        <strong>GET users's exercise log:</strong>
+        <code>
+          GET /api/exercise/log?{userId}[&from][&to][&limit]
+          <br>
+          <br>
+          { } = required, [ ] = optional
+          from, to = dates (yyyy-mm-dd); limit = number
+        </code>
+      </p>
+    </div>
+
+    <div id='user-form' class="form-container">
       <form action="/api/exercise/new-user" method="POST" id="new-user-form">
         <h4>
           New User
@@ -29,7 +49,7 @@
       </form>
     </div>
 
-    <div class="form-container">
+    <div id="exercise-form" class="form-container">
       <form action="/api/exercise/add" method="POST" id="new-exercise-form">
         <h4>
           New Exercise
@@ -37,7 +57,7 @@
         <input id="user-id" name="exercise[user]" type="text" placeholder="user id">
         <input id="exercise-description" name="exercise[description]" type="text" placeholder="description">
         <input id="exercise-duration" name="exercise[duration]" type="text" placeholder="duration">
-        <input id="exercise-date" name="exercise[date]" type="date" placeholder="dd-mm-yyyy">
+        <input id="exercise-date" name="exercise[date]" type="date" placeholder="yyyy-mm-dd">
         <button tupe="submit">
           Save exercise
         </button>

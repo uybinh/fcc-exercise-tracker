@@ -1,7 +1,7 @@
 const shortid = require("shortid")
 const timestampPlugin = require("./plugins/timestamp")
 const mongoose = require("mongoose")
-const { handleErrorsOnCreate } = require("../lib/handle-erorrs")
+const { handleErrorsOnCreate } = require("../lib/handle-errors")
 mongoose.set("useCreateIndex", true)
 
 const userSchema = mongoose.Schema({
